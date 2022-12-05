@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -16,9 +16,9 @@ export class RegisterComponent implements OnInit {
 
   //register model
   registerForm = this.fb.group({ //group
-    uname:[''], //array
-    acno:[''],
-    pswd:['']
+    uname:['',[Validators.required,Validators.pattern('[a-zA-Z]*')]], //array
+    acno:['',[Validators.required,Validators.pattern('[0-9]*')]],
+    pswd:['',[Validators.required,Validators.pattern('[0-9a-zA-Z]*')]]
   })
   //control - ts file model link to html file 
 
@@ -34,18 +34,27 @@ export class RegisterComponent implements OnInit {
     var username = this.registerForm.value.uname;
     var password = this.registerForm.value.pswd;
     var acno = this.registerForm.value.acno;
-    const result = this.ds.register(acno,username,password);
-    if(result){ //true
-      alert(' sucess');
-      this.router.navigateByUrl(''); // goes to login page
-    }
-     else{
-      alert('failed');
-      this.router.navigateByUrl('');
+    if(this.registerForm.valid){
+        console.log(this.registerForm.get('uname')?.errors);
+        
 
+      const result = this.ds.register(acno,username,password);
+      if(result){ //true
+        alert(' sucess');
+        this.router.navigateByUrl(''); // goes to login page
+      }
+       else{
+        alert('failed');
+        this.router.navigateByUrl('');
+  
+  
+        
+      }
 
-      
+    }else{
+      alert("Invalid form");
     }
+   
 
   }
 }

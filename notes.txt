@@ -74,6 +74,8 @@ Basic concepts
      b)Structural Directives(table)
         i) *ngFor
 
+        ii) ngIF
+
 6) Angular forms
     a)Template Driven Forms(first design html page and cannot do validation)
 
