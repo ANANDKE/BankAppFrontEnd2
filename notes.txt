@@ -84,4 +84,20 @@ Basic concepts
          1)Reactive Forms
            form group,array,control
            We can directly add validation via importing Reactive Form Module 
+
+7) Local storage
+     
+     -setItem - to store data
+     -getItem - to retrieve data
+     -removeItem - to remove data
+
+8) Parent child communication
+  
+    parent -> child
+    child -> parent
+
+  eg:
+     dashboard -> parent
+     delete -> child
+
         
