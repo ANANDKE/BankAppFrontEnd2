@@ -64,3 +64,22 @@ Basic concepts
    To hold redundent data
 
      ng g s service_name
+
+5) Angular Directives
+
+    To manipulate DOM
+
+     a)Compent Directives(array)
+
+     b)Structural Directives(table)
+        i) *ngFor
+
+6) Angular forms
+    a)Template Driven Forms(first design html page and cannot do validation)
+
+    b)Model Driven Forms(First design model in its file, Easy validation methods)   
+         -Advanced validation
+         1)Reactive Forms
+           form group,array,control
+           We can directly add validation via importing Reactive Form Module 
+        

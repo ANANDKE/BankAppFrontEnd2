@@ -4,14 +4,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
+  //current user
+
+  currentUser="";
+
+  //current acno
+  currentAcno="";
 
   constructor() { }
 
   //database...........
 userDetails:any={
-  1000:{acno:1000,username:'Richu',password:1000,balance:2000},
-  1001:{acno:1001,username:'Kichu',password:1001,balance:2000},
-  1002:{acno:1002,username:'Michu',password:1002,balance:2000}
+  1000:{acno:1000,username:'Richu',password:1000,balance:2000,transaction:[]},
+  1001:{acno:1001,username:'Kichu',password:1001,balance:2000,transaction:[]},
+  1002:{acno:1002,username:'Michu',password:1002,balance:2000,transaction:[]}
 }
 register(acno:any,username:any,password:any){
   let userDetails = this.userDetails
@@ -24,6 +30,7 @@ register(acno:any,username:any,password:any){
       username:username,
       password:password,
       balance:0,
+      transaction:[],
 
     }
     console.log(userDetails);
@@ -38,6 +45,8 @@ login(acno:any,pswd:any){
   let userDetails = this.userDetails
   if(acno in userDetails){
     if(pswd == userDetails[acno]['password']){
+      this.currentUser = userDetails[acno]['username'];
+      this.currentAcno = acno;
       return true;
     }
     else{
@@ -56,6 +65,12 @@ deposit(acno:any,pswd:any,amt:any){
   if(acno in userDetails){
     if(pswd==userDetails[acno]['password']){
       userDetails[acno]['balance'] +=amount;
+      userDetails[acno]['transaction'].push({
+        Type: "Credit",
+        Amount: amount
+      })
+      console.log(userDetails);
+      
       return userDetails[acno]['balance']
     }
     else{
@@ -77,6 +92,11 @@ withdraw(acno:any,pswd:any,amt:any){
     if(pswd==userDetails[acno]['password']){
       if(userDetails[acno]['balance']>amount){
         userDetails[acno]['balance'] -=amount;
+        userDetails[acno]['transaction'].push({
+          Type: "Debit",
+          Amount: amount
+        })
+        
       return userDetails[acno]['balance']
 
       }
@@ -97,5 +117,9 @@ withdraw(acno:any,pswd:any,amt:any){
   }
 
 
+}
+
+getTransaction(acno:any){
+return this.userDetails[acno]['transaction']
 }
 }
