@@ -93,11 +93,14 @@ Basic concepts
 
 8) Parent child communication
   
-    parent -> child
-    child -> parent
+    parent -> child @Input()
+    child -> parent @Output()
 
   eg:
      dashboard -> parent
      delete -> child
 
+9) Angular pipes
+
+      {{ value_expression | date [ : format [ : timezone [ : locale ] ] ] }}
         

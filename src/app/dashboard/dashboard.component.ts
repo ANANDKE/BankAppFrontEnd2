@@ -39,8 +39,12 @@ amount1 = "";
 //current user-login name
 user="";
 
+//system date
+sdate:any;
+
   constructor(private ds:DataService,private fb:FormBuilder,private router:Router) {
     this.user=this.ds.currentUser;
+    this.sdate = new Date();
    }
 
   ngOnInit(): void {
@@ -101,6 +105,10 @@ user="";
   delete(){
    // alert("clicked");
    this.acno =JSON.parse( localStorage.getItem('currentAcno') || '');
+  }
+
+  onCancel(){
+    this.acno="";
   }
 
 }
